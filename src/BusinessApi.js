@@ -57,8 +57,8 @@ class BusinessApi {
         return res;
     }
 
-    static async applyToJob(username, id) {
-        let res = await this.request(`users/${username}/jobs/${id}`, {}, "post");
+    static async postDish(username, data) {
+        let res = await this.request(`businesses/${username}`, data, "post");
         return res;
     }
 

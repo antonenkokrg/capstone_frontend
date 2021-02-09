@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Menu.css"
 import UserContext from "./UserContext";
 import BusinessApi from "./BusinessApi";
+import Table from "./Table"
+import NewForm from "./NewForm"
+import { Container, Row, Col } from 'reactstrap';
 
 
 function Menu() {
@@ -15,7 +18,7 @@ function Menu() {
         }
 
         getMenu();
-    }, [currentUser]);
+    }, [currentUser, setMenu]);
 
 
     async function removeData(id) {
@@ -26,46 +29,30 @@ function Menu() {
         }
 
     }
-
-
-    const renderHeader = () => {
-        let headerElement = ['id', 'type', 'name', 'description', 'price', 'delete']
-
-        return headerElement.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
+    async function addItem(data) {
+        let res = await BusinessApi.postDish(currentUser, data);
+        console.log(res)
+        if (res) {
+            setMenu([...menu, res.dish])
+        }
     }
-
-    const renderBody = () => {
-        return menu && menu.map(({ id, type, name, description, price }) => {
-            return (
-                <tr key={id}>
-                    <td>{id}</td>
-                    <td>{type}</td>
-                    <td>{name}</td>
-                    <td>{description}</td>
-                    <td>{price}</td>
-                    <td className='opration'>
-                        <button className='button' onClick={() => removeData(id)}>Delete</button>
-                    </td>
-                </tr>
-            )
-        })
-    }
-
 
     return (
-        <>
-            <h1 id='title'>Menu</h1>
-            <table id='menu'>
-                <thead>
-                    <tr>{renderHeader()}</tr>
-                </thead>
-                <tbody>
-                    {renderBody()}
-                </tbody>
-            </table>
-        </>
+        <Container>
+            <div className="text-center">
+                {/* <Row>
+                    <Col sm={{ size: 'auto', offset: 1 }}> */}
+                <Table items={menu} removeData={removeData} />
+                {/* </Col>
+                </Row>
+                <Row>
+                    <Col sm={{ size: 'auto', offset: 1 }}> */}
+                <NewForm addItem={addItem} />
+                {/* </Col>
+                </Row> */}
+            </div>
+
+        </Container>
     );
 }
 

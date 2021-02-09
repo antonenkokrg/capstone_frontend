@@ -16,6 +16,12 @@ function NavBar({ logout }) {
         return (
             <Nav className=" navbar-nav ml-auto" navbar>
                 <NavItem >
+                    <NavLink className="nav-link" to="/generateqr">Generate QR</NavLink>
+                </NavItem >
+                <NavItem >
+                    <NavLink className="nav-link" to={`/show/${currentUser}`}>Final view</NavLink>
+                </NavItem >
+                <NavItem >
                     <NavLink className="nav-link" to="/menu">Menu</NavLink>
                 </NavItem >
                 <NavItem >
@@ -37,7 +43,14 @@ function NavBar({ logout }) {
 
     return (
         <Navbar className="Navigation" expand="md">
-            <NavbarBrand className="text-secondary" href="/">QR Menu</NavbarBrand>
+            <NavbarBrand className="text-secondary" href="/">
+                <img
+                    alt=""
+                    src="./logo.png"
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                />QR Menu</NavbarBrand>
             {currentUser ? loggedInNav() : loggedOutNav()}
         </Navbar >
     );

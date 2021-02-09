@@ -1,11 +1,11 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import Home from "./Home";
 import Menu from "./Menu";
-// import Jobs from "./Jobs";
-// import Company from "./Company";
+import ShowMenu from "./ShowMenu";
 import Login from "./Login";
-// import Profile from "./Profile";
+import Qrcode from "./Qrcode";
+import PrivateRoute from "./PrivateRoute";
 
 function Routes({ setToken }) {
     return (
@@ -16,30 +16,22 @@ function Routes({ setToken }) {
                     <Home />
                 </Route>
 
+                <Route exact path="/generateqr">
+                    <Qrcode />
+                </Route>
+                <Route path="/show/:business">
+                    <ShowMenu />
+                </Route>
+
                 <Route exact path="/login" >
                     <Login setToken={setToken} />
                 </Route>
 
-                <Route exact path="/menu">
+                <PrivateRoute exact path="/menu">
                     <Menu />
-                </Route>
+                </PrivateRoute>
 
-                {/*<Route exact path="/jobs">
-                    <Jobs />
-                </Route>
-
-                <Route
-                    path="/companies/:handle"
-                >
-                    <Company />
-                </Route>
-
-                <Route
-                    path="/profile"
-                >
-                    <Profile />
-                </Route> */}
-
+                <Redirect to="/" />
             </Switch>
         </div>
     );

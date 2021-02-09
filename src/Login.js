@@ -56,7 +56,7 @@ function Login({ setToken }) {
         }
 
         setToken(token);
-        history.push("/companies");
+        history.push("/menu");
     }
 
     function handleChange(e) {
