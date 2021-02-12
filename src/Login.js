@@ -34,9 +34,9 @@ function Login({ setToken }) {
             data = {
                 username: loginInfo.username,
                 password: loginInfo.password,
-                firstName: loginInfo.firstName || undefined,
-                lastName: loginInfo.lastName || undefined,
-                email: loginInfo.email || undefined
+                email: loginInfo.email || undefined,
+                logoUrl: loginInfo.logoUrl || undefined,
+                adress: loginInfo.adress || undefined
             };
             endpoint = "register";
         } else {
@@ -69,30 +69,30 @@ function Login({ setToken }) {
     const signupFields = (
         <div>
             <div className="form-group">
-                <label>First name</label>
-                <input
-                    name="firstName"
-                    className="form-control"
-                    value={loginInfo.firstName}
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="form-group">
-                <label>Last name</label>
-                <input
-                    name="lastName"
-                    className="form-control"
-                    value={loginInfo.lastName}
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="form-group">
                 <label>Email</label>
                 <input
                     type="email"
                     name="email"
                     className="form-control"
                     value={loginInfo.email}
+                    onChange={handleChange}
+                />
+            </div>
+            <div className="form-group">
+                <label>Logo Url</label>
+                <input
+                    name="logoUrl"
+                    className="form-control"
+                    value={loginInfo.logoUrl}
+                    onChange={handleChange}
+                />
+            </div>
+            <div className="form-group">
+                <label>Adress</label>
+                <input
+                    name="adress"
+                    className="form-control"
+                    value={loginInfo.adress}
                     onChange={handleChange}
                 />
             </div>

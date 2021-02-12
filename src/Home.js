@@ -12,7 +12,7 @@ function Home() {
                 <h1 className="mb-4 font-weight-bold">QR Menu</h1>
                 <p className="lead">Your restaurant menu online</p>
                 {currentUser ? (
-                    <h2>Welcome Back {currentUser.first_name}!</h2>
+                    <h2>Welcome Back {currentUser}!</h2>
                 ) : (
                         <Link className="btn btn-primary font-weight-bold" to="/login">
                             Log in

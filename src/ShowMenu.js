@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Menu.css"
-import UserContext from "./UserContext";
+import "./ShowMenu.css"
 import BusinessApi from "./BusinessApi";
-import Table from "./Table"
-import { Container, Row, Col } from 'reactstrap';
+import Mains from "./Mains";
+import Extras from "./Extras";
 
 
 function ShowMenu() {
     const { business } = useParams();
 
-    let { currentUser } = useContext(UserContext);
     const [menu, setMenu] = useState([]);
 
     useEffect(() => {
@@ -22,36 +20,35 @@ function ShowMenu() {
                 setMenu([])
             }
         }
-
         getMenu();
     }, [business, setMenu]);
 
+    const drinks = menu.filter(men => men.type === "Drink")
+    const mains = menu.filter(men => men.type === "Main")
+    const sides = menu.filter(men => men.type === "Side")
 
-    async function removeData(id) {
-        let res = await BusinessApi.deleteDish(currentUser, id);
-        if (res) {
-            const del = menu.filter(men => id !== men.id)
-            setMenu(del)
-        }
-
+    function menuRender() {
+        return (
+            <>
+                <Mains meals={mains} />
+                <aside className="aside">
+                    {sides[0] ? (<Extras type="Sides" items={sides} />) : " "}
+                    <Extras type="Drinks" items={drinks} />
+                </aside>
+            </>)
     }
-    // async function addItem(data) {
-    //     let res = await BusinessApi.postDish(currentUser, data);
-    //     console.log(res)
-    //     if (res) {
-    //         setMenu([...menu, res.dish])
-    //     }
-    // }
+
 
     return (
-        <Container>
-            <Row>
-                <Col sm={{ size: 'auto', offset: 1 }}>
-                    {menu[0] ? <Table items={menu} removeData={removeData} /> : "No Menu"}
-
-                </Col>
-            </Row>
-        </Container>
+        <>
+            <h1 className="text-center">Menu</h1>
+            <div className="showmenu">
+                <style type="text/css">
+                    {`.navbar {display:none}`}
+                </style>
+                {menu[0] ? menuRender() : "Menu unavailable"}
+            </div>
+        </>
     );
 }
 

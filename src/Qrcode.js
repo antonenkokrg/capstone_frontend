@@ -14,6 +14,8 @@ function Qrcode() {
         backgroundColor: 'white',
     }
 
+    console.log(window.location.href)
+
     const downloadQR = () => {
         saveSvgAsPng.saveSvgAsPng(document.getElementById('123456'), 'shapes.png', imageOptions);
     };
@@ -27,7 +29,7 @@ function Qrcode() {
                     fgColor="#000000"
                     level="Q"
                     style={{ width: 256 }}
-                    value={`http://127.0.0.1/show/${currentUser}`}
+                    value={`http://${window.location.hostname}/show/${currentUser}`}
                 />
                 <br />
                 <Button color="secondary" className="mt-4" onClick={downloadQR}>Download QR </Button>

@@ -4,7 +4,7 @@ import UserContext from "./UserContext";
 import BusinessApi from "./BusinessApi";
 import Table from "./Table"
 import NewForm from "./NewForm"
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 
 
 function Menu() {
@@ -31,7 +31,6 @@ function Menu() {
     }
     async function addItem(data) {
         let res = await BusinessApi.postDish(currentUser, data);
-        console.log(res)
         if (res) {
             setMenu([...menu, res.dish])
         }
@@ -39,20 +38,11 @@ function Menu() {
 
     return (
         <Container>
-            <div className="text-center">
-                {/* <Row>
-                    <Col sm={{ size: 'auto', offset: 1 }}> */}
+            <Row className="justify-content-md-center">
                 <Table items={menu} removeData={removeData} />
-                {/* </Col>
-                </Row>
-                <Row>
-                    <Col sm={{ size: 'auto', offset: 1 }}> */}
-                <NewForm addItem={addItem} />
-                {/* </Col>
-                </Row> */}
-            </div>
-
-        </Container>
+            </Row>
+            <NewForm addItem={addItem} />
+        </ Container>
     );
 }
 

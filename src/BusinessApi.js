@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TOKEN_STORAGE_ID } from "./App.js"
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://192.168.0.102:3001";
 
 class BusinessApi {
     static async request(endpoint, params = {}, verb = "get") {
@@ -32,8 +32,11 @@ class BusinessApi {
             return (await q).data;
         } catch (err) {
             console.error("API Error:", err.response);
-            let message = err.response.data.message;
+            let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
+            // console.error("API Error:", err.response);
+            // let message = err.response.data.message;
+            // throw Array.isArray(message) ? message : [message];
         }
     }
 
