@@ -46,7 +46,7 @@ function NewForm({ addItem }) {
                     </FormGroup>
                     <FormGroup>
                         <Input type="number" name="price" id="price" placeholder="Price" onChange={handleChange}
-                            value={price} />
+                            value={price} min="0.1" max="999.9" />
                     </FormGroup>
                     <Button className="btn btn-success float-right">Add</Button>
                 </Col>

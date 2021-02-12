@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Restaurant online Menu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Deployed at:
 
-## Available Scripts
+	http://res-menu.surge.sh
+	
+	backend git https://github.com/antonenkokrg/capstone2
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##About
+Application was created for small businesses to support them in pandemic time. Its a cheap way to switch paper menu to online. Online menu can be available from everywhere by QRcode and the owners can change it anytime.
+	
+##Features
+Responsive menu with option to change. QRcode generator with function to save and print it. Login page.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##Tests
+Tests are created for backend to run it:
 
-### `npm test`
+		cd /backend
+		jest
+		
+##User Flows
+###Backend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+	POST /auth/token:  { username, password } => { token }
+	Returns JWT token which can be used to authenticate further requests.
+	Authorization required: none
+	
+	POST /auth/register:   { business } => { token }
+	user must include { username, password, email, logo_url, address .
+	Returns JWT token which can be used to authenticate further requests.
+	Authorization required: none
+	
+	GET businesses/[business] => { menu :[ type, name, description, [.....]] }
+	Returns {id, type, description, price, businesses_id}
+	Authorization required: none
+	
+	POST businesses/[business] { dish } => { dish }
+	Dish should be { type, name, description, price, businesses_id }
+	Returns { id, name}
+	Authorization required: current business
+	
+	DELETE businesses/[business]/[id]  =>  { deleted: dish }
+	Authorization required:  same-user-as-:business
+	
+###Frontend
+		/login allow user to login
+		
+		/menu show user their menu, allow add and delete some items from menu
+		
+		/generateqr  Generate QR code for menu
+		
+		/show/:business Final view Menu
 
-### `npm run build`
+##Stack
+PERN 
+Postgres
+Express
+React 
+Node
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
